@@ -18,10 +18,13 @@ class Game:
         if (correction := self.block_inside()) != (0, 0):
             self.current_block.move(correction[0], correction[1])
             self.lockblock()
+            return False
         #En serio que no me gusta este block_fits, si puedo cambiarlo en el futuro lo haré, sin embargo sirve para lo que quiero, solo un drop
         if not self.block_fits():
             self.current_block.move(-1, 0)
             self.lockblock()
+            return False
+        return True
     
     def lockblock(self):
         tiles = self.current_block.get_cell_positions()
@@ -72,7 +75,10 @@ class Game:
             self.current_block.undo_rotation()
 
     def drop(self):
-        self.current_block.drop()
+        while True:
+            if not self.move_down():
+                break
+        # self.current_block.move(-1, 0)
 
 
     # Better blockinside command
