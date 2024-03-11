@@ -13,6 +13,20 @@ class Game:
         self.current_block = self.set_current_block()
         self.game_over = False
 
+    def move_left(self):
+        self.current_block.move(0, -1)
+        correction = self.block_inside()
+        self.current_block.move(correction[0], correction[1])
+        if not self.block_fits():
+            self.current_block.move(0, 1)
+
+    def move_right(self):
+        self.current_block.move(0, 1)
+        correction = self.block_inside()
+        self.current_block.move(correction[0], correction[1])
+        if not self.block_fits():
+            self.current_block.move(0, -1) 
+
     def move_down(self):
         self.current_block.move(1, 0)
         if (correction := self.block_inside()) != (0, 0):
@@ -25,20 +39,45 @@ class Game:
             self.lockblock()
             return False
         return True
+
+    def simulate_move_down(self):
+        self.current_block.move(1, 0)
+        if (correction := self.block_inside()) != (0, 0):
+            self.current_block.move(correction[0], correction[1])
+            self.simulate_lockblock()
+            return False
+        #En serio que no me gusta este block_fits, si puedo cambiarlo en el futuro lo haré, sin embargo sirve para lo que quiero, solo un drop
+        if not self.block_fits():
+            self.current_block.move(-1, 0)
+            self.simulate_lockblock()
+            return False
+        return True
     
     def lockblock(self):
         tiles = self.current_block.get_cell_positions()
         for tile in tiles:
             self.grid.grid[tile.row][tile.column] = self.current_block.id
 
-        #TODO
         self.set_current_block()
         self.grid.clear_full_rows()
 
         ##No mes gusta, si cambias el blockfits, debes cambiar esta logica
         if not self.block_fits():
             self.game_over = True
-            
+
+    def simulate_lockblock(self):
+        tiles = self.current_block.get_cell_positions()
+        for tile in tiles:
+            self.grid.grid[tile.row][tile.column] = self.current_block.id
+
+        self.grid.calculate_parameters()
+
+        #Ahora restablecemos los cambios
+        for tile in tiles:
+            self.grid.grid[tile.row][tile.column] = 0
+        
+        if not self.block_fits():
+            self.game_over = True
 
 
     def block_fits(self):
@@ -71,14 +110,36 @@ class Game:
         self.current_block.rotate()
         if (correction := self.block_inside()) != (0, 0):
             self.current_block.move(correction[0], correction[1])
+        #PUAJ
         if not self.block_fits():
             self.current_block.undo_rotation()
+
+    def rotate_left(self):
+        self.current_block.undo_rotation()
+        if (correction := self.block_inside()) != (0, 0):
+            self.current_block.move(correction[0], correction[1])
+        #PUAJ
+        if not self.block_fits():
+            self.current_block.rotate()
+
+    def rotate_180(self):
+        self.current_block.rotate_180()
+        if (correction := self.block_inside()) != (0, 0):
+            self.current_block.move(correction[0], correction[1])
+        #PUAJ
+        if not self.block_fits():
+            self.current_block.rotate_180()
 
     def drop(self):
         while True:
             if not self.move_down():
                 break
         # self.current_block.move(-1, 0)
+
+    def simulate_drop(self):
+        while True:
+            if not self.simulate_move_down():
+                break
 
 
     # Better blockinside command
@@ -96,6 +157,12 @@ class Game:
 
     def set_current_block(self):
         self.current_block = self.scanner.scan()
+
+    def reset_block_position(self):
+        default_position = self.current_block.spawn_position
+        self.current_block.column_offset = default_position.column
+        self.current_block.row_ofset = default_position.row
+        self.current_block.rotation_state = 0
 
     #DELETEME
 

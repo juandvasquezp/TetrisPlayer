@@ -5,4 +5,4 @@ class Position:
 class Iteration:
     def __init__(self, position, rotation_state):
         self.position = position #gets start position
-        self.rotattion_state = rotation_state
+        self.rotation_state = rotation_state

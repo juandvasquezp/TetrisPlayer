@@ -15,6 +15,7 @@ class IBlock(Block):
         self.center = Position(1.5, 1.5) ##Recordar que esto tiene que ver con la cuadricula
         # self.move(-1, 3)
         self.spawn_position = Position(-1, 3)
+        print("Iblock spawned")
     def fill_iterations(self):
         iterations = []
         #position 0
@@ -29,6 +30,7 @@ class IBlock(Block):
 
         return iterations
     
+    
 class JBlock(Block):
     def __init__(self):
         super().__init__(id = 2)
@@ -42,6 +44,7 @@ class JBlock(Block):
         self.iterations = self.fill_iterations()
         # self.move(0, 3)
         self.spawn_position = Position(0, 3)
+        print("Jblock spawned")
 
     def fill_iterations(self):
         iterations = []
@@ -73,6 +76,7 @@ class TBlock(Block):
         self.iterations = self.fill_iterations()
         # self.move(0, 3)
         self.spawn_position = Position(0, 3)
+        print("Tblock spawned")
 
     def fill_iterations(self):
         iterations = []
@@ -104,6 +108,7 @@ class ZBlock(Block):
         self.iterations = self.fill_iterations()
         # self.move(0, 3)
         self.spawn_position = Position(0, 3)
+        print("Zblock spawned")
     
     def fill_iterations(self):
         iterations = []
@@ -132,6 +137,7 @@ class OBlock(Block):
         self.iterations = self.fill_iterations()
         # self.move(0, 4)
         self.spawn_position = Position(0, 4)
+        print("Oblock spawned")
     
     def fill_iterations(self):
         iterations = []
@@ -153,6 +159,7 @@ class LBlock(Block):
         self.iterations = self.fill_iterations()
         # self.move(0, 3)
         self.spawn_position = Position(0, 3)
+        print("Lblock spawned")
     
     def fill_iterations(self):
         iterations = []
@@ -184,6 +191,7 @@ class SBlock(Block):
         self.iterations = self.fill_iterations()
         # self.move(0, 3)
         self.spawn_position = Position(0, 3)
+        print("Sblock spawned")
     
     def fill_iterations(self):
         iterations = []

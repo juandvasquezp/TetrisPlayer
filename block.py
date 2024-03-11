@@ -30,3 +30,6 @@ class Block:
 
     def undo_rotation(self):
         self.rotation_state = (self.rotation_state - 1) % len(self.cells)
+
+    def rotate_180(self):
+        self.rotation_state = (self.rotation_state + 2) % len(self.cells)
