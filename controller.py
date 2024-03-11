@@ -1,4 +1,5 @@
-import pyautogui
+# import pyautogui
+import keyboard
 import time
 import random
 
@@ -14,22 +15,25 @@ class Controller:
         if rotation_state == 0:
             pass
         elif rotation_state == 1:
-            pyautogui.keyDown('right')
+            #pyautogui.keyDown('right')
+            keyboard.press_and_release('right')
             self.game.rotate()
-            self.random_sleep()
-            pyautogui.keyUp('right')
+            #self.random_sleep()
+            #pyautogui.keyUp('right')
             self.random_sleep()
         elif rotation_state == 2:
-            pyautogui.keyDown('up')
+            #pyautogui.keyDown('up')
+            keyboard.press_and_release('up')
             self.game.rotate_180()
-            self.random_sleep()
-            pyautogui.keyUp('up')
+            #self.random_sleep()
+            #pyautogui.keyUp('up')
             self.random_sleep()
         elif rotation_state == 3:
-            pyautogui.keyDown('left')
+            #pyautogui.keyDown('left')
+            keyboard.press_and_release('left')
             self.game.rotate_left()
-            self.random_sleep()
-            pyautogui.keyUp('left')
+            #self.random_sleep()
+            #pyautogui.keyUp('left')
             self.random_sleep()
 
     def move_to_iteration(self, position):
@@ -40,26 +44,29 @@ class Controller:
 
         if moves > 0:
             for i in range(moves):
-                pyautogui.keyDown('d')
-                self.short_sleep()
-                pyautogui.keyUp('d')
+                keyboard.press_and_release('d')
+                #pyautogui.keyDown('d')
+                #self.short_sleep()
+                #pyautogui.keyUp('d')
                 self.game.move_right()
-                print("moving right")
+                #print("moving right")
                 self.random_sleep()
 
         elif moves < 0:
             for i in range(abs(moves)):
-                pyautogui.keyDown('a')
-                self.short_sleep()
-                pyautogui.keyUp('a')
+                keyboard.press_and_release('a')
+                #pyautogui.keyDown('a')
+                #self.short_sleep()
+                #pyautogui.keyUp('a')
                 self.game.move_left()
-                print("moving left")
+                #print("moving left")
                 self.random_sleep()
         
-        pyautogui.keyDown('s')
+        #pyautogui.keyDown('s')
+        keyboard.press_and_release('s')
         self.game.drop()
-        self.short_sleep()
-        pyautogui.keyUp('s')
+        #self.short_sleep()
+        #pyautogui.keyUp('s')
         self.random_sleep()
 
     def random_sleep(self):

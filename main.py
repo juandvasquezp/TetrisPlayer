@@ -23,6 +23,6 @@ while True:
     if not game.game_over:
         iteration = genetic_algorithm.test_current_block_iterations()
         controller.go_to_iteration(iteration)
-        game.grid.print_grid()
+        # game.grid.print_grid()
         
         

@@ -4,7 +4,9 @@ from PIL import Image
 from blocks import *
 
 ##TODO: Finde the correct region for only one screen
-region = {'top': 1032, 'left': 2188, 'width':1 , 'height': 1}
+# region = {'top': 1032, 'left': 2188, 'width':1 , 'height': 1}
+## Only one screen
+region = {'top': 278, 'left': 908, 'width': 1, 'height': 1}
 
 class Scanner:
     def __init__(self):
