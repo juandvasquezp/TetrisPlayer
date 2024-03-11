@@ -1,9 +1,12 @@
-import time
-import keyboard
-import sys
+import time, keyboard, sys
+
 from game import Game
+from genetic_algorithm import genetic_algorithm
+from controller import Controller
 
 game = Game()
+genetic_algorithm = genetic_algorithm(game)
+controller = Controller(game)
 
 #Start program
 while True:
@@ -12,14 +15,14 @@ while True:
         time.sleep(2)
         break
 
-prev_s_pressed = False
 while True:
     if keyboard.is_pressed('q'):  # Si se presiona la tecla 'p', salir del bucle
         sys.exit()
         break
-    if keyboard.is_pressed('s') and not prev_s_pressed:
-        game.set_current_block()  # Detectar la ficha
-        prev_s_pressed = True  # Actualizar el estado previo de la tecla 's'
-        game.grid.print_grid()    
-    elif not keyboard.is_pressed('s'):  # Si la tecla 's' no está presionada
-        prev_s_pressed = False  # Actualizar el estado previo de la tecla 's'
+
+    if not game.game_over:
+        iteration = genetic_algorithm.test_current_block_iterations()
+        controller.go_to_iteration(iteration)
+        # game.grid.print_grid()
+        
+        
