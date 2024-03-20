@@ -26,7 +26,7 @@ class genetic_algorithm:
 
         self.game.reset_block_position()
 
-        print("Besti iteration is to rotate to position " + str(good_iteration.rotation_state) + " and move to column " + str(good_iteration.position.column) + " and row " + str(good_iteration.position.row))
+        # print("Besti iteration is to rotate to position " + str(good_iteration.rotation_state) + " and move to column " + str(good_iteration.position.column) + " and row " + str(good_iteration.position.row))
         return good_iteration
 
     def calculate_grid_score(self):
