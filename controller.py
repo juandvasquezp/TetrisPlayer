@@ -70,6 +70,6 @@ class Controller:
         self.random_sleep()
 
     def random_sleep(self):
-        ms = 50
+        # ms = 50
         # ms = random.randint(200, 500)
-        time.sleep(ms / 1000)
+        time.sleep(50 / 1000)
